@@ -1,0 +1,26 @@
+# CSV upload for the program
+
+import csv
+
+
+from tkinter.filedialog import askopenfilename
+
+
+def open_csv():
+
+    open_name = askopenfilename()
+
+    with open(open_name) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                line_count += 1
+            else:
+                hour = int(float(row[1]))  # What hour of the day in hour bins. (13:59 = 13 in data)
+                waiting_time = int(float(row[0]))  # The waiting time in minutes (seconds rounded to the smallest minute)
+                line_count += 1
+                print(hour, waiting_time)
+
+
+open_csv()
